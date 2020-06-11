@@ -1,0 +1,10 @@
+<!--miniprogram/pages/musiclist/musiclist.wxml-->
+<view class="musiclist-container">
+  <view class="music-bgc" style="background: url({{musicInfo.imgUrl}}) no-repeat  top/cover"></view>
+  <view class="mask"></view>
+  <view class="music-info">
+    <image src="{{musicInfo.imgUrl}}"></image>
+    <view class="name">{{musicInfo.name}}</view>
+  </view>
+  <x-musiclist data="{{musiclist}}"/> 
+</view>

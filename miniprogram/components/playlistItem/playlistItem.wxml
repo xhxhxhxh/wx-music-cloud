@@ -1,0 +1,6 @@
+<!--components/playlistItem/playlistItem.wxml-->
+<view class="playlist-item" bind:tap="gotoMusiclist">
+  <image src="{{data.picUrl}}" class="playlist-img"></image>
+  <text class="palylist-count">{{count}}</text>
+  <view class="palylist-name">{{data.name}}</view>
+</view>

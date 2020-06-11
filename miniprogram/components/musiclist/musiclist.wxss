@@ -1,0 +1,38 @@
+.music-item {
+  display: flex;
+  padding: 14rpx 20rpx;
+  align-items: center;
+}
+.music-item.active .left, .music-item.active .right view{
+  color: #ff4d4f;
+}
+.left {
+  color: #888;
+  font-size: 34rpx;
+  width: 80rpx;
+  box-sizing: border-box;
+  padding-left: 10rpx;
+}
+
+.right {
+  flex-grow: 1;
+  width: 0;
+}
+
+.name {
+  font-size: 34rpx;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 10rpx;
+}
+
+.alia {
+  color: #888;
+}
+
+.singer {
+  font-size: 24rpx;
+  color: #888;
+}

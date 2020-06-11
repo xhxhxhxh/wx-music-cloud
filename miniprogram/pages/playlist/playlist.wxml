@@ -1,0 +1,11 @@
+<view class="playlist-conatiner">
+  <swiper indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <swiper-item wx:for="{{swiperImgUrl}}" wx:key="id">
+      <image src="{{item.url}}" mode="widthFix"></image>
+    </swiper-item>
+  </swiper>
+  <view class="playlist">
+    <x-playlist wx:for="{{playlist}}" wx:key="id" data="{{item}}" />
+  </view>
+</view>

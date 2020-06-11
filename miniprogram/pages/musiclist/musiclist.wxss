@@ -1,0 +1,41 @@
+.musiclist-container {
+  position: relative;
+}
+.music-bgc {
+  height: 320rpx;
+  filter: blur(40rpx);
+  opacity: 0.4;
+}
+.mask {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 320rpx;
+  background-color: #333;
+  z-index: -1;
+}
+.music-info {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 320rpx;
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.music-info image {
+  width: 280rpx;
+  height: 280rpx;
+  margin-right: 24rpx;
+  border-radius: 6rpx;
+}
+.music-info .name {
+  flex: 1;
+  width: 0;
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 400;
+}
