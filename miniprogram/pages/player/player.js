@@ -24,6 +24,7 @@ Page({
 
   // 加载音乐信息
   loadMusic() {
+    BackgroundAudioManager.stop()
     const musicInfo = musiclist[musicIndex]
     const picUrl = musicInfo.al.picUrl
     console.log( musiclist[musicIndex])
@@ -122,6 +123,9 @@ Page({
       BackgroundAudioManager.coverImgUrl = this.data.picUrl
       BackgroundAudioManager.singer = this.data.musicInfo.ar[0].name
       BackgroundAudioManager.epname = this.data.musicInfo.al.name
+      BackgroundAudioManager.onCanplay((data) => {
+        console.log(data)
+      })
       wx.hideLoading()
       this.setData({
         isPlaying: true
