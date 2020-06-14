@@ -1,8 +1,8 @@
 <view class="progress-bar-container">
   <text class="currentTime">{{currentTime}}</text>
   <view class="control">
-    <movable-area>
-      <movable-view direction="horizontal" x="{{x}}" damping="1000"></movable-view>
+    <movable-area class="movable-area" bind:tap="tapMovableArea">
+      <movable-view class="movable-view" direction="horizontal" x="{{x}}" damping="1000" bind:change="movableViewChange" bind:touchend="moveEnd"></movable-view>
     </movable-area>
     <progress percent="{{percent}}" stroke-width="4" backgroundColor="#969696" activeColor="#fff"/>
   </view>

@@ -5,7 +5,7 @@
     <image class="player-img {{isPlaying?'':'paused'}}" src="{{picUrl}}"></image>
   </view>
   <view class="progress-bar">
-    <x-progress-bar />
+    <x-progress-bar duration="{{duration}}"/>
   </view>
   <view class="control">
     <text class="iconfont icon-shangyishoushangyige" bind:tap="prevMusic"></text>

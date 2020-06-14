@@ -10,7 +10,8 @@ Page({
   data: {
     musicInfo: {},
     picUrl: '',
-    isPlaying: false
+    isPlaying: false,
+    duration: 0
   },
 
   /**
@@ -118,14 +119,17 @@ Page({
     }).then((res) => {
       const result = JSON.parse(res.result)
       console.log(result)
+      BackgroundAudioManager.onPlay(() => {
+        this.setData({
+          duration: BackgroundAudioManager.duration
+        })
+      })
       BackgroundAudioManager.src = result.data[0].url
       BackgroundAudioManager.title = this.data.musicInfo.name
       BackgroundAudioManager.coverImgUrl = this.data.picUrl
       BackgroundAudioManager.singer = this.data.musicInfo.ar[0].name
       BackgroundAudioManager.epname = this.data.musicInfo.al.name
-      BackgroundAudioManager.onCanplay((data) => {
-        console.log(data)
-      })
+      
       wx.hideLoading()
       this.setData({
         isPlaying: true
