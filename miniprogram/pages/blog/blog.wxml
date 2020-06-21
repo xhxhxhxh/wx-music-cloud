@@ -1,2 +1,18 @@
-<!--pages/blog/blog.wxml-->
-<text>pages/blog/blog.wxml</text>
+<view class="blog-container">
+  <view class="header">
+    <view class="publish-container" bind:tap="getAuthorize">
+      <i class="iconfont icon-fabu"></i>
+    </view>
+    <view class="search-container">
+      <x-search iconfont="iconfont" icon-sousuo="icon-sousuo" bind:search="onSearch"/>
+    </view>
+  </view>
+  <view class="blog-list">
+    <block wx:for="{{bloglist}}" wx:key="_id">
+      <view class="blog-panel">
+        <x-blog-card blog="{{item}}" data-blogid="{{item._id}}" />
+      </view>
+    </block>
+  </view>
+  <x-authorize showModal="{{showModal}}" bind:authorizeSuccess="onAuthorizeSuccess" bind:authorizeFail="onAuthorizeFail"></x-authorize>
+</view>

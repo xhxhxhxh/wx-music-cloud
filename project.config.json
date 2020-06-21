@@ -19,7 +19,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wx24bcfca26088129f",
@@ -68,6 +68,20 @@
 					"id": -1,
 					"name": "pages/player/player",
 					"pathName": "pages/player/player",
+					"query": "musicId=2083073&index=0",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/blog/blog",
+					"pathName": "pages/blog/blog",
+					"query": "musicId=2083073&index=0",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/blogEdit/blogEdit",
+					"pathName": "pages/blogEdit/blogEdit",
 					"query": "musicId=2083073&index=0",
 					"scene": null
 				}

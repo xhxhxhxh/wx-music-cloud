@@ -15,7 +15,26 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      playingMusicId: '',
+      lyric: ''
+    }
+  },
+
+  setPlayingMusicId(id) {
+    this.globalData.playingMusicId = id
+  },
+
+  getPlayingMusicId() {
+    return this.globalData.playingMusicId
+  },
+
+  setLyric(lyric) {
+    this.globalData.lyric = lyric
+  },
+
+  getLyric() {
+    return this.globalData.lyric
   },
 
   onShow: function () {

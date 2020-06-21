@@ -2,6 +2,7 @@
 let musiclist = []
 let musicIndex = ''
 const BackgroundAudioManager = wx.getBackgroundAudioManager()
+const app = getApp()
 Page({
 
   /**
@@ -11,7 +12,11 @@ Page({
     musicInfo: {},
     picUrl: '',
     isPlaying: false,
-    duration: 0
+    duration: 0,
+    isLyric: false,
+    lyric: '',
+    currentTime: 0,
+    musicId: ''
   },
 
   /**
@@ -25,18 +30,28 @@ Page({
 
   // 加载音乐信息
   loadMusic() {
-    BackgroundAudioManager.stop()
     const musicInfo = musiclist[musicIndex]
     const picUrl = musicInfo.al.picUrl
-    console.log( musiclist[musicIndex])
-    this.getMusicUrl(musicInfo.id)
     wx.setNavigationBarTitle({
       title: musicInfo.name,
     })
     this.setData({
       musicInfo,
-      picUrl
+      picUrl,
+      musicId: musicInfo.id,
+      isPlaying: !BackgroundAudioManager.paused
     })
+    if(app.getPlayingMusicId() === musicInfo.id) {
+      this.setData({
+        duration: BackgroundAudioManager.duration,
+        lyric: app.getLyric()
+      })
+      return
+    }
+    BackgroundAudioManager.stop()
+    this.getMusicUrl(musicInfo.id)
+    this.getLyric(musicInfo.id)
+    app.setPlayingMusicId(musicInfo.id)
   },
 
   // 上一首
@@ -118,10 +133,22 @@ Page({
       }
     }).then((res) => {
       const result = JSON.parse(res.result)
-      console.log(result)
+      if (result.data[0].url == null) {
+        wx.showToast({
+          title: '无权限播放',
+          icon: 'none'
+        })
+        return
+      }
       BackgroundAudioManager.onPlay(() => {
         this.setData({
-          duration: BackgroundAudioManager.duration
+          duration: BackgroundAudioManager.duration,
+          isPlaying: true
+        })
+      })
+      BackgroundAudioManager.onPause(() => {
+        this.setData({
+          isPlaying: false
         })
       })
       BackgroundAudioManager.src = result.data[0].url
@@ -131,9 +158,6 @@ Page({
       BackgroundAudioManager.epname = this.data.musicInfo.al.name
       
       wx.hideLoading()
-      this.setData({
-        isPlaying: true
-      })
     })
   },
 
@@ -147,6 +171,37 @@ Page({
     }
     this.setData({
       isPlaying: !isPlay
+    })
+  },
+
+  // 切换歌词
+  switchToLyric() {
+    this.setData({
+      isLyric: !this.data.isLyric
+    })
+  },
+
+  // 获取歌词
+  getLyric(musicId) {
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId,
+        $url: 'lyric',
+      }
+    }).then(res => {
+      const lrc = JSON.parse(res.result).lrc
+      const lyric = lrc ? lrc.lyric : '暂无歌词'
+      app.setLyric(lyric)
+      this.setData({
+        lyric
+      })
+    })
+  },
+
+  setCurrentTime(e) {
+    this.setData({
+      currentTime: parseInt(e.detail.currentTime)
     })
   }
 })

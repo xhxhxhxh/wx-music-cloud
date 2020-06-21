@@ -4,7 +4,8 @@
     "pages/blog/blog",
     "pages/profile/profile",
     "pages/musiclist/musiclist",
-    "pages/player/player"
+    "pages/player/player",
+    "pages/blogEdit/blogEdit"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -13,7 +14,9 @@
     "navigationBarTitleText": "音乐",
     "navigationBarTextStyle": "white"
   },
-  "requiredBackgroundModes": ["audio"],
+  "requiredBackgroundModes": [
+    "audio"
+  ],
   "tabBar": {
     "list": [
       {

@@ -33,17 +33,12 @@ Component({
   lifetimes: {
     ready: function() {
       this.getMovableAreaWidth()
-      BackgroundAudioManager.onTimeUpdate(() => {
-        if(isMoving) return
-        const currentTime = this.handleTime(parseInt(BackgroundAudioManager.currentTime))
-        if(currentTime.split(':')[1] !== this.data.currentTime.split(':')[1]){
-          progress = (BackgroundAudioManager.currentTime / this.properties.duration) * 100
-          this.setData({
-            currentTime,
-            x: movableAreaWidth * progress / 100,
-            percent: progress
-          })
-        }
+      this.handleMusicTimeUpdate() // 初次进入即调用
+      BackgroundAudioManager.onTimeUpdate(this.handleMusicTimeUpdate.bind(this))
+
+      // 播放结束自动下一首
+      BackgroundAudioManager.onEnded(() => {
+        this.triggerEvent('playEnded')
       })
     }
   },
@@ -65,13 +60,27 @@ Component({
       return minutes + ':' + seconds
     },
 
+    handleMusicTimeUpdate() {
+      if(isMoving) return
+      let _this = this;
+      const currentTime = _this.handleTime(parseInt(BackgroundAudioManager.currentTime))
+      if(currentTime.split(':')[1] !== this.data.currentTime.split(':')[1]){
+        progress = (BackgroundAudioManager.currentTime / this.properties.duration)* 100
+        this.triggerEvent('setCurrentTime', {currentTime: BackgroundAudioManager.currentTime})
+        this.setData({
+          currentTime,
+          x: movableAreaWidth * progress / 100,
+          percent: progress
+        })
+      }
+    },
+
     // 获取滑动区域宽度
     getMovableAreaWidth() {
       const query = this.createSelectorQuery()
       query.select('.movable-area').boundingClientRect()
       query.select('.movable-view').boundingClientRect()
       query.exec(rect => {
-        console.log(rect)
         offsetLeft = rect[0].left
         movableAreaWidth = rect[0].width - rect[1].width
         movableViewWidth = rect[1].width

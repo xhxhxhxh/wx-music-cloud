@@ -1,0 +1,8 @@
+<scroll-view hidden="{{isLyricShow}}" class="lyric-scroll" scroll-y scroll-top="{{scrollTop}}" scroll-with-animation="true" bind:scroll="scrolling" bind:touchstart="startScroll" bind:touchend="endScroll">
+  <view class="lyric-panel">
+    <block wx:for="{{lyricList}}" wx:key="item">
+      <view class="lyric {{index==nowLyricIndex?'hightlight-lyric': ''}}">{{item}}</view>
+    </block>
+  </view>
+
+</scroll-view>
