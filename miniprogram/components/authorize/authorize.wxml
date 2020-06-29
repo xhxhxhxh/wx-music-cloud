@@ -1,4 +1,4 @@
-<x-bottom-modal showModal="{{showModal}}">
+<x-bottom-modal showModal="{{showModal}}" bind:closeModal="closeModal">
   <view slot="modal-content">
     <button class="authorize"
       open-type="getUserInfo"

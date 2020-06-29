@@ -1,6 +1,7 @@
 // pages/blog/blog.js
 const MAX_LIMIT = 3
 let searchWord = ''
+let modalType = ''
 Page({
 
   /**
@@ -8,7 +9,9 @@ Page({
    */
   data: {
     showModal: false,
-    bloglist: []
+    showCommentModal: false,
+    bloglist: [],
+    currentBlogId: ''
   },
 
   /**
@@ -21,6 +24,15 @@ Page({
   onPullDownRefresh: function () {
     this.setData({ bloglist: [] })
     this._getBlogList()
+  },
+
+  // 分享
+  onShareAppMessage(event) {
+    const blog = event.target.dataset.blog
+    return {
+      title: blog.content,
+      path: '/pages/blogComment/blogComment?blogId=' + blog._id
+    }
   },
 
   /**
@@ -56,18 +68,27 @@ Page({
       data: event.detail,
       key: 'userInfo',
     })
-    this.setData({
-      showModal: false  
-    })
-    wx.navigateTo({
-      url: '/pages/blogEdit/blogEdit',
-    })
+    if(modalType === 'comment') {
+      this.setData({
+        showModal: false,
+        showCommentModal: true  
+      })
+      modalType = ''
+    }else {
+      this.setData({
+        showModal: false  
+      })
+      modalType = ''
+      wx.navigateTo({
+        url: '/pages/blogEdit/blogEdit',
+      })
+    }
   },
 
   // 授权失败
   onAuthorizeFail() {
     wx.showModal({
-      title: '授权用户才能发布',
+      title: modalType === 'comment' ? '授权用户才能评论' : '授权用户才能发布',
       content: '',
     })
   },
@@ -100,5 +121,37 @@ Page({
     searchWord = event.detail.value
     this.setData({ bloglist: [] })
     this._getBlogList()
+  },
+
+  // 显示评论modal
+  showCommentModal(event) {
+    modalType = 'comment'
+    this.setData({
+      currentBlogId: event.detail.blogId
+    })
+    this.getAuthorize()
+  },
+
+  // 关闭modal
+  closeModal() {
+    modalType = ''
+    this.setData({
+      showModal: false
+    })
+  },
+
+  // 关闭评论modal
+  closeCommentModal() {
+    this.setData({
+      showCommentModal: false
+    })
+  },
+
+  // 跳转评论页
+  goBlogComment(event) {
+    const blogId = event.currentTarget.dataset.blogid
+    wx.navigateTo({
+      url: '/pages/blogComment/blogComment?blogId=' + blogId,
+    })
   }
 })

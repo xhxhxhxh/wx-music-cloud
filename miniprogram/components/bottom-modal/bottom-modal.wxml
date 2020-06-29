@@ -1,5 +1,5 @@
 <view class="modal" hidden="{{!showModal}}">
-  <view class="panel">
+  <view class="panel" style="bottom: {{bottomStyle}}">
       <i class="iconfont icon-shanchu1" bind:tap="onClose"></i>
       <!-- slot插槽  具名插槽-->
       <slot name="modal-content"></slot>

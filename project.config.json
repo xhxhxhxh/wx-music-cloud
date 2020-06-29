@@ -6,13 +6,19 @@
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": false,
 		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
@@ -83,6 +89,13 @@
 					"name": "pages/blogEdit/blogEdit",
 					"pathName": "pages/blogEdit/blogEdit",
 					"query": "musicId=2083073&index=0",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/blogComment/blogComment",
+					"pathName": "pages/blogComment/blogComment",
+					"query": "blogId=e6a3b07d5eec7eb6001754550efa720a",
 					"scene": null
 				}
 			]

@@ -25,6 +25,9 @@ Component({
       }else {
         this.triggerEvent('authorizeFail')
       }
+    },
+    closeModal() {
+      this.triggerEvent('closeModal')
     }
   }
 })

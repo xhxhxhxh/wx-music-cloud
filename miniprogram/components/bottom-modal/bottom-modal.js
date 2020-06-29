@@ -4,14 +4,29 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    showModal: Boolean
+    showModal: Boolean,
+    bottom: Number
   },
 
   /**
    * 组件的初始数据
    */
   data: {
+    bottomStyle: 0
+  },
 
+  observers: {
+    'bottom': function(val) {
+      if(val) {
+        this.setData({
+          bottomStyle: val + 'px'
+        })
+      }else {
+        this.setData({
+          bottomStyle: 0
+        })
+      }
+    }
   },
 
   options: {
@@ -24,9 +39,7 @@ Component({
    */
   methods: {
     onClose() {
-      this.setData({
-        showModal: false
-      })
+      this.triggerEvent('closeModal')
     }
   }
 })

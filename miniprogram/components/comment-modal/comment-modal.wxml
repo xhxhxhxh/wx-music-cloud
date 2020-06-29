@@ -1,0 +1,6 @@
+<x-bottom-modal showModal="{{showCommentModal}}" bottom="{{footerBottom}}" bind:closeModal="closeCommentModal">
+  <view slot="modal-content">
+    <textarea name="content" class="comment-content" placeholder="写评论" fixed="true" bindinput="onInput" value="{{text}}" bindfocus="onFocus" bindblur="onBlur" adjust-position="{{false}}"></textarea>
+    <button class="send" size="mini" bind:tap="send">发送</button>
+  </view>
+</x-bottom-modal>
