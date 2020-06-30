@@ -98,10 +98,9 @@ Component({
 
     // 订阅消息
     requestSubscribeMessage(content) {
-      console.log(formatTime(new Date()))
       wx.requestSubscribeMessage({
         tmplIds: ['eX1d-2Av1uVanmUg38JtV03OePVH8XVbpk5X3OOzB_0'],
-        success: () => {
+        success: (res) => {
           wx.cloud.callFunction({
             name: 'sendMessage',
             data: {

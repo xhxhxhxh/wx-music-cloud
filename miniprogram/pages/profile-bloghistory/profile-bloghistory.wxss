@@ -1,0 +1,4 @@
+.blog-panel {
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+}

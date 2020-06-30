@@ -68,5 +68,21 @@ exports.main = async (event, context) => {
     }
   })
 
+  app.router('bloglistByOpenid', async (ctx, next) => {
+    const wxContext = cloud.getWXContext()
+    const openid = wxContext.OPENID
+    ctx.body = await cloud.database().collection('blog')
+      .where({
+        _openid: openid
+      })
+      .skip(event.start)
+      .limit(event.count)
+      .orderBy('createTime', 'desc')
+      .get()
+      .then((res) => {
+        return res
+      })
+  })
+
   return app.serve()
 }

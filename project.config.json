@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wx24bcfca26088129f",
@@ -95,6 +95,20 @@
 					"id": 5,
 					"name": "pages/blogComment/blogComment",
 					"pathName": "pages/blogComment/blogComment",
+					"query": "blogId=e6a3b07d5eec7eb6001754550efa720a",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/profile/profile",
+					"pathName": "pages/profile/profile",
+					"query": "blogId=e6a3b07d5eec7eb6001754550efa720a",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "playlist",
+					"pathName": "pages/playlist/playlist",
 					"query": "blogId=e6a3b07d5eec7eb6001754550efa720a",
 					"scene": null
 				}

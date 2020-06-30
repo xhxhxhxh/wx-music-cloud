@@ -1,0 +1,11 @@
+<view class="blog-list">
+    <block wx:for="{{bloglist}}" wx:key="_id">
+      <view class="blog-panel">
+        <x-blog-card blog="{{item}}" data-blogid="{{item._id}}" bind:tap="goBlogComment"/>
+        <x-blog-ctrl iconfont="iconfont" icon-fenxiang="icon-fenxiang" icon-pinglun="icon-pinglun" blog="{{item}}" bind:showCommentModal="showCommentModal" blogId="{{item._id}}"/>
+      </view>
+    </block>
+</view>
+<x-authorize showModal="{{showModal}}" bind:authorizeSuccess="onAuthorizeSuccess" bind:closeModal="closeModal" bind:authorizeFail="onAuthorizeFail"></x-authorize>
+<x-comment-modal bind:closeCommentModal="closeCommentModal" showCommentModal="{{showCommentModal}}" 
+blogId="{{currentBlogId}}"/>

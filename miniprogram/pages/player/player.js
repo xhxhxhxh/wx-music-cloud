@@ -50,6 +50,7 @@ Page({
     }
     BackgroundAudioManager.stop()
     this.getMusicUrl(musicInfo.id)
+    this.saveMusicHistory(musicInfo)
     this.getLyric(musicInfo.id)
     app.setPlayingMusicId(musicInfo.id)
   },
@@ -72,54 +73,25 @@ Page({
     this.loadMusic()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  // 保存播放历史
+  saveMusicHistory(musicInfo) {
+    const openid = app.globalData.openid
+    const localMusicHistory = wx.getStorageSync(openid)
+    if(localMusicHistory.length > 0) {
+      for(let i = 0; i < localMusicHistory.length; i++) {
+        if(localMusicHistory[i].id === musicInfo.id) {
+          localMusicHistory.splice(i, 1)
+          break
+        }
+      }
+    }
+    localMusicHistory.unshift(musicInfo)
+    wx.setStorage({
+      data: localMusicHistory,
+      key: openid,
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+  
 
   getMusicUrl(musicId) {
     wx.showLoading({
