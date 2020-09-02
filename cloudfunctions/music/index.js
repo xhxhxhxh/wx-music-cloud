@@ -5,7 +5,8 @@ const TcbRouter = require('tcb-router')
 
 const rp = require('request-promise')
 
-const BASE_URL = 'http://musicapi.xiecheng.live'
+const BASE_URL = 'https://apis.imooc.com';
+const ICODE='icode=A0CD56251BD9C237';
 
 cloud.init()
 
@@ -27,20 +28,20 @@ exports.main = async (event, context) => {
   })
 
   app.router('musiclist', async (ctx, next) => {
-    ctx.body = await rp(BASE_URL + '/playlist/detail?id=' + parseInt(event.playlistId))
+    ctx.body = await rp(`${BASE_URL}/playlist/detail?id=${parseInt(event.playlistId)}&${ICODE}`)
       .then((res) => {
         return JSON.parse(res)
       })
   })
 
   app.router('musicUrl', async (ctx, next) => {
-    ctx.body = await rp(BASE_URL + `/song/url?id=${event.musicId}`).then((res) => {
+    ctx.body = await rp(`${BASE_URL}/song/url?id=${event.musicId}&${ICODE}`).then((res) => {
       return res
     })
   })
 
   app.router('lyric', async (ctx, next) => {
-    ctx.body = await rp(BASE_URL + `/lyric?id=${event.musicId}`).then((res) => {
+    ctx.body = await rp(`${BASE_URL}/lyric?id=${event.musicId}&${ICODE}`).then((res) => {
       return res
     })
   })

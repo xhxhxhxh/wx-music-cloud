@@ -42,7 +42,7 @@ Component({
       firstCurrentTime = currentTime
       if(this.data.lyricList.length <= 0) return
       const index = this.getLyricIndex(Math.round(currentTime))
-      if(index !== undefined) {
+      if(index !== undefined && index !== this.data.nowLyricIndex) {
         if(fingerScroll || scrolling) {
           this.setData({
             nowLyricIndex: index

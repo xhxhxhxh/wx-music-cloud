@@ -7,7 +7,7 @@ const db = cloud.database()
 
 const rp = require('request-promise')
 
-const URL = 'http://musicapi.xiecheng.live/personalized'
+const URL='https://apis.imooc.com/personalized?icode=A0CD56251BD9C237'
 
 const playlistCollection = db.collection('playlist')
 
